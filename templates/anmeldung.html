@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anmeldeformular</title>
+    <style>
+        /* Ergänzen Sie hier benutzerdefinierte CSS-Stile, um das Design anzupassen */
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+        .form-container h2 {
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .form-group input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .form-group input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .footer {
+            height: 10vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #e30613;
+            color: #ffed00;
+            font-weight: bold;
+            position: sticky;
+            bottom: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        /* Stile für das Popup */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            z-index: 1001; /* Über Footer, aber unter Modal */
+        }
+        .popup h3 {
+            margin-top: 0;
+        }
+        .popup p {
+            margin-bottom: 10px;
+        }
+        .popup button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Anmeldeformular</h2>
+        <form id="anmeldeformular" action="/anmelden" method="post" onsubmit="return validateForm()">
+            <div class="form-group">
+                <label for="vorname">Vorname:</label>
+                <input type="text" id="vorname" name="vorname" required>
+            </div>
+            <div class="form-group">
+                <label for="nachname">Nachname:</label>
+                <input type="text" id="nachname" name="nachname" required>
+            </div>
+            <div class="form-group">
+                <label for="email">E-Mail:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="telefon">Telefon:</label>
+                <input type="tel" id="telefon" name="telefon" required>
+            </div>
+            <div class="form-group">
+                <label for="adresse">Adresse:</label>
+                <input type="text" id = "adresse" name="adresse" required></text>
+            </div>
+            <div class="form-group">
+                <label for="verein">Verein:</label>
+                <input type="text" id = "verein" name="verein" required></text>
+            </div>
+            <div class="form-group">
+                <label for="Schule">Schule:</label>
+                <input type="text" id = "schule" name="schule" required></text>
+            </div>
+            </br>
+            <div class="form-group">
+                <label>Wahl der Disziplinen:</label><br>
+                <input type="checkbox" id="disziplin_400m" name="disziplin[]" value="400m">
+                <label for="disziplin_400m">400m</label><br>
+                <input type="checkbox" id="disziplin_1000m" name="disziplin[]" value="1000m">
+                <label for="disziplin_1000m">1000m</label><br>
+                <input type="checkbox" id="disziplin_2500m" name="disziplin[]" value="2500m">
+                <label for="disziplin_2500m">2500m</label><br>
+                <!-- Fügen Sie hier weitere Checkboxen für zusätzliche Disziplinen hinzu -->
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Anmelden">
+            </div>
+        </form>
+    </div>
+    <footer class="footer">
+        <a href="https://bez-dahme-spreewald.dlrg.de/"><img src="static\dahme spreewald.svg" style="width:50vh;height:50vh;"></a>
+    </footer>
+
+    <!-- Popup für fehlende Felder -->
+    <div id="popup" class="popup">
+        <h3>Bitte alle Felder ausfüllen!</h3>
+        <p>Bitte füllen Sie alle markierten Felder aus, bevor Sie das Formular absenden.</p>
+        <button onclick="closePopup()">OK</button>
+    </div>
+
+    <script>
+        function validateForm() {
+            var form = document.getElementById('anmeldeformular');
+            var inputs = form.querySelectorAll('input, textarea');
+
+            for (var i = 0; i < inputs.length; i++) {
+                if (!inputs[i].value.trim()) {
+                    // Zeige Popup an
+                    document.getElementById('popup').style.display = 'block';
+                    return false; // Verhindere das Absenden des Formulars
+                }
+            }
+
+            return true; // Erlaube das Absenden des Formulars
+        }
+
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
