@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 import csv
 import os
+import mail
 
 app = Flask(__name__)
 
@@ -28,7 +29,8 @@ def anmelden():
     email = request.form['email']
     telefon = request.form['telefon']
     adresse = request.form['adresse']
-
+    disziplin = request.form.getlist('disziplin')
+    print(disziplin)
     data = {
         'Vorname': vorname,
         'Nachname': nachname,
@@ -38,7 +40,7 @@ def anmelden():
     }
 
     write_to_csv(data)
-
+    mail.send_email(email,disziplin)
     return redirect(url_for('index'))
 
 
