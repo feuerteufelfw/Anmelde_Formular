@@ -27,16 +27,19 @@ def anmelden():
     vorname = request.form['vorname']
     nachname = request.form['nachname']
     email = request.form['email']
-    telefon = request.form['telefon']
     adresse = request.form['adresse']
     disziplin = request.form.getlist('disziplin')
+    verein = request.form['verein']
+    schule = request.form['schule']
     print(disziplin)
     data = {
         'Vorname': vorname,
         'Nachname': nachname,
         'E-Mail': email,
-        'Telefon': telefon,
-        'Adresse': adresse
+        'Adresse': adresse,
+        'Verein': verein,
+        'Schule': schule,
+        'Disziplin': disziplin
     }
 
     write_to_csv(data)
